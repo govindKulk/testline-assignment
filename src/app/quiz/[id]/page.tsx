@@ -5,8 +5,8 @@ import React from 'react'
 
 async function SingleQuizPage() {
 
-  const questions = await getQuestions();
-  if(!questions){
+  const res = await getQuestions();
+  if(!res){
     return  redirect('/');
   }
   return (
@@ -14,7 +14,7 @@ async function SingleQuizPage() {
     className="max-w-screen-xl mx-auto "
     >
     
-          <QuizGameScreen questions={questions}/>
+          <QuizGameScreen questions={res.questions} duration={res.duration}/>
         
     </div>
   )

@@ -1,6 +1,6 @@
 "use client"
 
-import { ComponentProps, useState } from "react";
+import { ComponentProps, useEffect, useRef, useState } from "react";
 
 import Question from "./Question";
 import { AnimatePresence } from "motion/react";
@@ -16,17 +16,18 @@ import QuizResults from "./QuizResults";
 
 interface QuizGameScreenProps {
     questions: TQuestion[];
+    duration: number;
 }
 
 
 
-const QuizGameScreen: React.FC<QuizGameScreenProps> = ({ questions }) => {
+const QuizGameScreen: React.FC<QuizGameScreenProps> = ({ questions, duration }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [allQuestions, setAllQuestions] = useState<TQuestion[]>(questions);
     const [direction, setDirection] = useState("right");
     const [showResults, setShowResults] = useState(false);
     const [attemptedQuestionCount, setAttemptedQuestionsCount] = useState(0);
-
+    const [remTime, setRemTime] = useState(duration * 60);
     const nextQuestion = () => {
         if (currentIndex < allQuestions.length - 1) {
             setCurrentIndex((prev) => prev + 1);
@@ -52,10 +53,35 @@ const QuizGameScreen: React.FC<QuizGameScreenProps> = ({ questions }) => {
         setAttemptedQuestionsCount(attemptedQuestionCount + 1);
     };
 
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        timerRef.current = setInterval(() => {
+            
+            setRemTime(prev => {
+                if (prev <= 1) {  // Stop at 0
+                    clearInterval(timerRef.current!);
+                    setShowResults(true);
+                    return 0;
+                }
+                return prev - 1;
+            });
+
+        }, 1000);
+
+        return () => clearInterval(timerRef.current!); // Cleanup on unmount
+    }, []);
+
 
 
     return (
-        <div className="flex items-center justify-center min-h-[calc(100vh-84px)] p-4">
+        <div className="flex  flex-col items-start justify-center min-h-[calc(100vh-84px)] p-4">
+            
+            {!isNaN(remTime) && !showResults && <div
+            className="font-bold w-[600px] mx-auto animate animate-pulse my-1 text-lg self-end max-w-full"
+            >
+                {Math.floor(remTime / 60) } : {remTime % 60}
+            </div>}
             <AnimatePresence mode="wait">
                 {
                     !showResults && allQuestions.map((question, index) => (

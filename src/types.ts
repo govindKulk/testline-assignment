@@ -23,4 +23,9 @@ export type Question = {
   selected_option: number
 }
 
+export type QustionApiResponse = {
+  duration: number,
+  questions: Question[] 
+}
+
 

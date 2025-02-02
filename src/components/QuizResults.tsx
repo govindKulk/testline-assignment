@@ -42,9 +42,9 @@ export default function QuizResults({ allQuestions, attemptedQuestions }: QuizRe
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: [1.2, 1], opacity: 1 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="w-[600px]"
+            className="w-[600px] max-w-full mx-auto"
         >
-            <Card className="w-full h-full min-h-[634px] max-w-[600px] mx-auto sm:p-4 flex flex-col justify-evenly">
+            <Card className="w-full h-full min-h-[634px] max-w-[600px] mx-auto sm:p-4 max-sm:pt-3 flex flex-col justify-evenly">
                 <CardContent>
                     <CardTitle className="text-slate-600 text-xl sm:text-2xl font-bold">
                         Results
@@ -54,7 +54,7 @@ export default function QuizResults({ allQuestions, attemptedQuestions }: QuizRe
                             <p className='font-semibold text-xl'>Summary:</p>
                             <p>Total: {allQuestions.length}</p>
                             <p>Attempted: {attemptedQuestions}</p>
-                            <p className='text-emerald-400'>Correct: {correctCount}</p>
+                            <p className='text-emerald-500'>Correct: {correctCount}</p>
                             <p className='text-rose-400'>Wrong: {attemptedQuestions - correctCount}</p>
                         </div>
                     </CardDescription>

@@ -27,7 +27,7 @@ const ResultQuestion: React.FC<QuestionProps> = ({ question, questionNumber, tot
 
     return (
         
-            <Card className="w-full h-full min-h-[634px] max-w-[600px] mx-auto sm:p-4 flex flex-col justify-evenly">
+            <Card className="w-full h-full min-h-[634px] max-w-[600px] mx-auto sm:p-4 max-sm:pt-3 flex flex-col justify-evenly">
                 <CardContent>
                     <CardTitle className="text-slate-600 text-base xs:text-lg sm:text-xl font-bold">
                         Q: {questionNumber + 1 + "/" + totalQuestions}
@@ -42,7 +42,7 @@ const ResultQuestion: React.FC<QuestionProps> = ({ question, questionNumber, tot
                         {question.options.map((option: Option) => (
                             <span
                                 key={option.id}
-                                className={`w-full py-2 xs:py-4 sm:py-6 px-2 xs:px-3  sm:px-4 border border-slate-300 flex items-center justify-center rounded-xl text-left transition-colors text-slate-500 hover:text-foreground/80 text-sm xs:text-base sm:text-lg font-bold ${
+                                className={`w-full py-2 xs:py-4 px-2 xs:px-2 border border-slate-300 flex items-center justify-center rounded-xl text-left transition-colors text-slate-500 hover:text-foreground/80 text-sm xs:text-base sm:text-lg font-bold ${
                                     selectedOption === option.id
                                         ? isCorrect
                                             ? "bg-green-500 text-white"
@@ -55,7 +55,7 @@ const ResultQuestion: React.FC<QuestionProps> = ({ question, questionNumber, tot
                         ))}
                     </div>
                     { correctOption && (
-                        <div className="bg-green-50 text-green-500 font-semibold text-base sm:text-lg py-2 rounded-md shadow border my-2 sm:my-4 px-4 border-green-500">
+                        <div className="bg-green-50 text-green-500 font-semibold text-base sm:text-lg py-1 xs:py-2 rounded-md shadow border my-2 sm:my-4 px-2 xs:px-4 border-green-500">
                             Correct Answer: {correctOption.description}
                         </div>
                     )}

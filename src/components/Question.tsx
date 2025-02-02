@@ -98,9 +98,9 @@ const Question: React.FC<QuestionProps> = ({ question, onNext, onPrev, saveProgr
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: exitDirection ==="right" ? '100%' : '-100%', opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="w-[600px]"
+            className="w-[600px] self-center max-w-full "
         >
-            <Card className="w-full h-full min-h-[634px] max-w-[600px] mx-auto sm:p-4 flex flex-col justify-evenly">
+            <Card className={`w-full h-full min-h-[634px] max-w-[600px] mx-auto sm:p-4 flex flex-col justify-evenly ${selectedOption && 'max-sm:pt-3'}`}>
                 <CardContent>
                     <CardTitle className="text-slate-600 text-lg sm:text-xl font-bold">
                         Q: {currentIndex + 1 + "/" + totalQuestions}
